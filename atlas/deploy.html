@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deploy Model — Atlas AI Cloud</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- ============ TOP NAVIGATION ============ -->
+  <nav class="topnav">
+    <a href="index.html" class="topnav__logo"><span>ATLAS</span></a>
+    <div class="topnav__links">
+      <a href="marketplace.html" class="topnav__link">Models</a>
+      <a href="dashboard.html" class="topnav__link">Dashboard</a>
+      <a href="monitoring.html" class="topnav__link">Monitoring</a>
+      <a href="#pricing" class="topnav__link">Pricing</a>
+      <a href="https://docs.atlas.ai" class="topnav__link">Docs</a>
+    </div>
+    <div class="topnav__actions">
+      <a href="deploy.html" class="btn btn--primary btn--sm topnav__link--active">Deploy Now</a>
+    </div>
+    <button class="topnav__mobile-toggle" onclick="document.querySelector('.topnav__links').classList.toggle('topnav__links--open')">☰</button>
+  </nav>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="main-content main-content--full" style="padding-top: calc(var(--nav-height) + var(--space-xl))">
+    <div class="container">
+
+      <!-- Page Header -->
+      <div class="page-header animate-on-scroll">
+        <div class="page-header__left">
+          <h2 class="page-header__title">Deploy a Model</h2>
+          <p class="page-header__subtitle">Launch your AI model to production in minutes with GPU-accelerated infrastructure</p>
+        </div>
+      </div>
+
+      <!-- ============ WIZARD ============ -->
+      <div class="wizard">
+
+        <!-- Step Indicators -->
+        <div class="wizard__steps animate-on-scroll">
+          <div class="wizard__step wizard__step--active" data-step="1">
+            <span class="wizard__step-number">1</span>
+            <span class="wizard__step-label">Select Model</span>
+          </div>
+          <div class="wizard__step-connector"></div>
+          <div class="wizard__step" data-step="2">
+            <span class="wizard__step-number">2</span>
+            <span class="wizard__step-label">Configure</span>
+          </div>
+          <div class="wizard__step-connector"></div>
+          <div class="wizard__step" data-step="3">
+            <span class="wizard__step-number">3</span>
+            <span class="wizard__step-label">Environment</span>
+          </div>
+          <div class="wizard__step-connector"></div>
+          <div class="wizard__step" data-step="4">
+            <span class="wizard__step-number">4</span>
+            <span class="wizard__step-label">Review &amp; Deploy</span>
+          </div>
+        </div>
+
+        <!-- ======== STEP 1: Select Model ======== -->
+        <div class="wizard__panel wizard__panel--active" id="panel-1">
+          <h4 class="wizard__panel-title">Choose your model source</h4>
+          <p class="wizard__panel-desc">Upload your own trained model or select a pre-built model from our marketplace.</p>
+
+          <div class="grid grid--2">
+            <!-- Upload Option -->
+            <div class="model-option" id="opt-upload">
+              <div class="model-option__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <div class="model-option__title">Upload Custom Model</div>
+              <div class="model-option__desc">Upload your trained model weights, ONNX, or containerized model. Supports PyTorch, TensorFlow, JAX, and ONNX formats.</div>
+            </div>
+
+            <!-- Marketplace Option -->
+            <div class="model-option" id="opt-marketplace">
+              <div class="model-option__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+              </div>
+              <div class="model-option__title">Choose from Marketplace</div>
+              <div class="model-option__desc">Select from popular pre-trained models optimized for deployment. One-click deploy with automatic configuration.</div>
+            </div>
+          </div>
+
+          <!-- Upload Zone (hidden by default) -->
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-zone__icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <div class="upload-zone__text">Drag and drop your model file here, or click to browse</div>
+            <div class="upload-zone__hint">Supports .pt, .pth, .onnx, .pb, .h5, .safetensors — Max 50 GB</div>
+          </div>
+
+          <!-- Mini Model Grid (hidden by default) -->
+          <div class="mini-model-grid" id="mini-model-grid">
+            <div class="mini-model" data-model="LLaMA 3 70B">
+              <div class="mini-model__name">LLaMA 3 70B</div>
+              <div class="mini-model__meta">
+                <span class="badge badge--info">NLP</span>
+                <span class="mini-model__size">130 GB</span>
+              </div>
+            </div>
+            <div class="mini-model" data-model="Stable Diffusion XL">
+              <div class="mini-model__name">Stable Diffusion XL</div>
+              <div class="mini-model__meta">
+                <span class="badge badge--neutral">Generative</span>
+                <span class="mini-model__size">6.9 GB</span>
+              </div>
+            </div>
+            <div class="mini-model" data-model="Whisper Large V3">
+              <div class="mini-model__name">Whisper Large V3</div>
+              <div class="mini-model__meta">
+                <span class="badge badge--warning">Audio</span>
+                <span class="mini-model__size">3.1 GB</span>
+              </div>
+            </div>
+            <div class="mini-model" data-model="Mistral 7B">
+              <div class="mini-model__name">Mistral 7B</div>
+              <div class="mini-model__meta">
+                <span class="badge badge--info">NLP</span>
+                <span class="mini-model__size">14 GB</span>
+              </div>
+            </div>
+            <div class="mini-model" data-model="CLIP ViT-L/14">
+              <div class="mini-model__name">CLIP ViT-L/14</div>
+              <div class="mini-model__meta">
+                <span class="badge badge--success">Vision</span>
+                <span class="mini-model__size">1.7 GB</span>
+              </div>
+            </div>
+            <div class="mini-model" data-model="CodeLlama 34B">
+              <div class="mini-model__name">CodeLlama 34B</div>
+              <div class="mini-model__meta">
+                <span class="badge badge--info">NLP</span>
+                <span class="mini-model__size">63 GB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======== STEP 2: Configure ======== -->
+        <div class="wizard__panel" id="panel-2">
+          <h4 class="wizard__panel-title">Configure Infrastructure</h4>
+          <p class="wizard__panel-desc">Select compute resources for your deployment. Choose GPU type, replicas, and memory allocation.</p>
+
+          <div class="form-grid">
+            <!-- GPU Type -->
+            <div class="form-group">
+              <label class="form-label" for="gpu-type">GPU Type</label>
+              <select class="input" id="gpu-type">
+                <option value="">Select GPU…</option>
+                <option value="a100-40gb">NVIDIA A100 40GB</option>
+                <option value="a100-80gb">NVIDIA A100 80GB</option>
+                <option value="h100-80gb">NVIDIA H100 80GB</option>
+                <option value="l40">NVIDIA L40 48GB</option>
+                <option value="t4">NVIDIA T4 16GB</option>
+              </select>
+              <span class="form-hint">Recommended: A100 80GB for large language models</span>
+            </div>
+
+            <!-- Replicas -->
+            <div class="form-group">
+              <label class="form-label" for="replicas">Replicas</label>
+              <input type="number" class="input input--mono" id="replicas" value="1" min="1" max="100">
+              <span class="form-hint">Number of instances to run (1–100)</span>
+            </div>
+
+            <!-- Memory -->
+            <div class="form-group">
+              <label class="form-label" for="memory">Memory</label>
+              <select class="input" id="memory">
+                <option value="">Select memory…</option>
+                <option value="16gb">16 GB</option>
+                <option value="32gb">32 GB</option>
+                <option value="64gb">64 GB</option>
+                <option value="128gb">128 GB</option>
+              </select>
+              <span class="form-hint">System RAM per replica</span>
+            </div>
+
+            <!-- Auto-Scale -->
+            <div class="form-group">
+              <label class="form-label">Auto-Scale</label>
+              <div class="toggle-row">
+                <label class="toggle">
+                  <input type="checkbox" id="autoscale-toggle">
+                  <span class="toggle__slider"></span>
+                </label>
+                <span class="toggle-label">Enable auto-scaling</span>
+              </div>
+              <div class="autoscale-fields" id="autoscale-fields">
+                <div class="form-group">
+                  <label class="form-label" for="autoscale-min">Min Replicas</label>
+                  <input type="number" class="input input--mono" id="autoscale-min" value="1" min="1" max="100">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="autoscale-max">Max Replicas</label>
+                  <input type="number" class="input input--mono" id="autoscale-max" value="10" min="1" max="100">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======== STEP 3: Environment ======== -->
+        <div class="wizard__panel" id="panel-3">
+          <h4 class="wizard__panel-title">Environment Setup</h4>
+          <p class="wizard__panel-desc">Configure deployment region, environment variables, and networking settings.</p>
+
+          <div class="form-grid">
+            <!-- Region -->
+            <div class="form-group">
+              <label class="form-label" for="region">Region</label>
+              <select class="input" id="region">
+                <option value="">Select region…</option>
+                <option value="us-east-1">US East (Virginia) — us-east-1</option>
+                <option value="us-west-2">US West (Oregon) — us-west-2</option>
+                <option value="eu-west-1">EU West (Ireland) — eu-west-1</option>
+                <option value="ap-southeast-1">Asia Pacific (Singapore) — ap-southeast-1</option>
+              </select>
+              <span class="form-hint">Deploy to the region closest to your users</span>
+            </div>
+
+            <!-- Container Port -->
+            <div class="form-group">
+              <label class="form-label" for="container-port">Container Port</label>
+              <input type="number" class="input input--mono" id="container-port" value="8080" min="1" max="65535">
+              <span class="form-hint">The port your model server listens on</span>
+            </div>
+
+            <!-- Environment Variables -->
+            <div class="form-group form-group--full">
+              <label class="form-label">Environment Variables</label>
+              <div id="env-vars-container">
+                <div class="env-var-row">
+                  <input type="text" class="input input--mono env-key" placeholder="KEY" value="MODEL_NAME">
+                  <input type="text" class="input input--mono env-value" placeholder="value" value="default">
+                  <button type="button" class="btn--remove" title="Remove">✕</button>
+                </div>
+                <div class="env-var-row">
+                  <input type="text" class="input input--mono env-key" placeholder="KEY" value="MAX_BATCH_SIZE">
+                  <input type="text" class="input input--mono env-value" placeholder="value" value="32">
+                  <button type="button" class="btn--remove" title="Remove">✕</button>
+                </div>
+              </div>
+              <button type="button" class="btn--add-env" id="btn-add-env">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Variable
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======== STEP 4: Review & Deploy ======== -->
+        <div class="wizard__panel" id="panel-4">
+          <h4 class="wizard__panel-title">Review &amp; Deploy</h4>
+          <p class="wizard__panel-desc">Review your deployment configuration before launching.</p>
+
+          <!-- Summary Card -->
+          <div class="summary-card">
+            <div class="summary-card__header">
+              <div class="summary-card__title">Deployment Configuration</div>
+            </div>
+            <div class="summary-card__body">
+              <div class="summary-row">
+                <span class="summary-row__label">Model</span>
+                <span class="summary-row__value" id="sum-model">—</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-row__label">GPU Type</span>
+                <span class="summary-row__value summary-row__value--mono" id="sum-gpu">—</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-row__label">Replicas</span>
+                <span class="summary-row__value summary-row__value--mono" id="sum-replicas">—</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-row__label">Memory</span>
+                <span class="summary-row__value summary-row__value--mono" id="sum-memory">—</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-row__label">Region</span>
+                <span class="summary-row__value summary-row__value--mono" id="sum-region">—</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-row__label">Container Port</span>
+                <span class="summary-row__value summary-row__value--mono" id="sum-port">—</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-row__label">Environment Variables</span>
+                <span class="summary-row__value summary-row__value--mono" id="sum-env">—</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cost Display -->
+          <div class="cost-display">
+            <div class="cost-display__label">Estimated Cost</div>
+            <div>
+              <span class="cost-display__value" id="cost-value">$0.00</span>
+              <span class="cost-display__unit">/hr</span>
+            </div>
+            <div class="cost-display__breakdown" id="cost-breakdown">Configure your deployment to see pricing</div>
+          </div>
+
+          <!-- Deploy Progress -->
+          <div class="deploy-progress" id="deploy-progress">
+            <div class="deploy-progress__status" id="deploy-status">Initializing…</div>
+            <div class="deploy-progress__bar">
+              <div class="deploy-progress__fill" id="deploy-progress-fill"></div>
+            </div>
+            <div class="deploy-progress__log" id="deploy-log"></div>
+          </div>
+
+          <!-- Deploy Success -->
+          <div class="deploy-success" id="deploy-success">
+            <div class="deploy-success__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3 class="deploy-success__title">Deployment Successful!</h3>
+            <p class="text-muted">Your model is now live and processing requests.</p>
+            <div class="deploy-success__endpoint">https://api.atlas.ai/v1/your-model</div>
+            <div style="margin-top: var(--space-xl); display: flex; gap: var(--space-md); justify-content: center;">
+              <a href="monitoring.html" class="btn btn--secondary">View Monitoring</a>
+              <a href="dashboard.html" class="btn btn--primary">Go to Dashboard</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======== Wizard Navigation ======== -->
+        <div class="wizard__nav">
+          <button class="btn btn--ghost" id="btn-back" style="display:none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back
+          </button>
+          <div></div>
+          <button class="btn btn--primary btn--lg" id="btn-next">
+            Next
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <button class="btn--deploy" id="btn-deploy" style="display:none">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:8px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Deploy to Production
+          </button>
+        </div>
+
+      </div><!-- /wizard -->
+
+    </div><!-- /container -->
+  </main>
+
+  <script src="js/deploy.js"></script>
+</body>
+</html>

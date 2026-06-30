@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Atlas AI Cloud</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- ============ Top Navigation ============ -->
+  <nav class="topnav">
+    <a href="index.html" class="topnav__logo"><span>ATLAS</span></a>
+    <div class="topnav__links">
+      <a href="marketplace.html" class="topnav__link">Models</a>
+      <a href="dashboard.html" class="topnav__link topnav__link--active">Dashboard</a>
+      <a href="monitoring.html" class="topnav__link">Monitoring</a>
+      <a href="#pricing" class="topnav__link">Pricing</a>
+      <a href="https://docs.atlas.ai" class="topnav__link">Docs</a>
+    </div>
+    <div class="topnav__actions">
+      <a href="deploy.html" class="btn btn--primary btn--sm">Deploy Now</a>
+    </div>
+    <button class="topnav__mobile-toggle" onclick="document.querySelector('.topnav__links').classList.toggle('topnav__links--open')">☰</button>
+  </nav>
+
+  <!-- ============ App Layout ============ -->
+  <div class="app-layout">
+
+    <!-- ======== Sidebar ======== -->
+    <aside class="sidebar sidebar--flex" id="dashSidebar">
+      <div class="sidebar__section">
+        <div class="sidebar__section-title">Navigation</div>
+
+        <a href="#" class="sidebar__item sidebar__item--active" id="navOverview">
+          <span class="sidebar__item-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="1" width="7" height="7" rx="1"/>
+              <rect x="10" y="1" width="7" height="7" rx="1"/>
+              <rect x="1" y="10" width="7" height="7" rx="1"/>
+              <rect x="10" y="10" width="7" height="7" rx="1"/>
+            </svg>
+          </span>
+          <span class="sidebar__item-label">Overview</span>
+        </a>
+
+        <a href="#" class="sidebar__item" id="navModels">
+          <span class="sidebar__item-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 1L16 5V13L9 17L2 13V5L9 1Z"/>
+              <path d="M9 17V9"/>
+              <path d="M16 5L9 9"/>
+              <path d="M2 5L9 9"/>
+            </svg>
+          </span>
+          <span class="sidebar__item-label">Models</span>
+        </a>
+
+        <a href="#" class="sidebar__item" id="navDeployments">
+          <span class="sidebar__item-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 1V13"/>
+              <path d="M5 9L9 13L13 9"/>
+              <rect x="2" y="14" width="14" height="3" rx="1"/>
+            </svg>
+          </span>
+          <span class="sidebar__item-label">Deployments</span>
+        </a>
+
+        <a href="monitoring.html" class="sidebar__item" id="navMonitoring">
+          <span class="sidebar__item-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 13 5 7 9 10 13 4 17 8"/>
+              <line x1="1" y1="17" x2="17" y2="17"/>
+            </svg>
+          </span>
+          <span class="sidebar__item-label">Monitoring</span>
+        </a>
+
+        <a href="#" class="sidebar__item" id="navAPIKeys">
+          <span class="sidebar__item-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="7" cy="11" r="4"/>
+              <path d="M10 8L16 2"/>
+              <path d="M14 2H16V4"/>
+              <path d="M13 5L15 3"/>
+            </svg>
+          </span>
+          <span class="sidebar__item-label">API Keys</span>
+        </a>
+      </div>
+
+      <div class="sidebar__divider"></div>
+
+      <div class="sidebar__section">
+        <div class="sidebar__section-title">Account</div>
+
+        <a href="#" class="sidebar__item" id="navBilling">
+          <span class="sidebar__item-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="16" height="12" rx="2"/>
+              <line x1="1" y1="8" x2="17" y2="8"/>
+              <line x1="4" y1="12" x2="8" y2="12"/>
+            </svg>
+          </span>
+          <span class="sidebar__item-label">Billing</span>
+        </a>
+
+        <a href="#" class="sidebar__item" id="navSettings">
+          <span class="sidebar__item-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="9" r="3"/>
+              <path d="M9 1V3"/>
+              <path d="M9 15V17"/>
+              <path d="M1 9H3"/>
+              <path d="M15 9H17"/>
+              <path d="M3.3 3.3L4.7 4.7"/>
+              <path d="M13.3 13.3L14.7 14.7"/>
+              <path d="M3.3 14.7L4.7 13.3"/>
+              <path d="M13.3 4.7L14.7 3.3"/>
+            </svg>
+          </span>
+          <span class="sidebar__item-label">Settings</span>
+        </a>
+      </div>
+
+      <!-- User panel at bottom -->
+      <div class="sidebar__user">
+        <div class="sidebar__user-avatar">AK</div>
+        <div class="sidebar__user-info">
+          <div class="sidebar__user-name">Alex Kim</div>
+          <div class="sidebar__user-email">alex@company.io</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ======== Main Content ======== -->
+    <main class="main-content">
+
+      <!-- Top Bar -->
+      <div class="dash-topbar">
+        <div class="flex gap-md" style="align-items:center">
+          <button class="sidebar-toggle-mobile" id="sidebarToggle">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <line x1="2" y1="4" x2="16" y2="4"/>
+              <line x1="2" y1="9" x2="16" y2="9"/>
+              <line x1="2" y1="14" x2="16" y2="14"/>
+            </svg>
+          </button>
+          <h1 class="dash-topbar__title" id="pageTitle">Overview</h1>
+        </div>
+        <div class="dash-topbar__right">
+          <input type="text" class="input input--search dash-topbar__search" placeholder="Search models, endpoints..." id="dashSearch">
+          <div class="dash-topbar__avatar" data-tooltip="Alex Kim">AK</div>
+        </div>
+      </div>
+
+      <!-- ======== Stats Row ======== -->
+      <div class="grid grid--4 dash-stats animate-on-scroll">
+
+        <!-- Stat 1: Active Models -->
+        <div class="stat-card" id="statCard1">
+          <div class="stat-card__icon stat-card__icon--blue">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 1L18 5.5V14.5L10 19L2 14.5V5.5L10 1Z"/>
+              <path d="M10 19V10"/>
+              <path d="M18 5.5L10 10"/>
+              <path d="M2 5.5L10 10"/>
+            </svg>
+          </div>
+          <div class="stat-card__label">Active Models</div>
+          <div class="stat-card__value" data-counter="12" data-duration="1000" id="statModels">0</div>
+          <div class="stat-card__trend stat-card__trend--up">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 8 6 3 11 8"/></svg>
+            +3 this week
+          </div>
+        </div>
+
+        <!-- Stat 2: Requests (24h) -->
+        <div class="stat-card" id="statCard2">
+          <div class="stat-card__icon stat-card__icon--purple">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="2 14 6 8 10 11 14 5 18 9"/>
+              <line x1="2" y1="18" x2="18" y2="18"/>
+            </svg>
+          </div>
+          <div class="stat-card__label">Requests (24h)</div>
+          <div class="stat-card__value" data-counter="847293" data-duration="1800" id="statRequests">0</div>
+          <div class="stat-card__trend stat-card__trend--up">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 8 6 3 11 8"/></svg>
+            +12.4%
+          </div>
+        </div>
+
+        <!-- Stat 3: Avg Latency -->
+        <div class="stat-card" id="statCard3">
+          <div class="stat-card__icon stat-card__icon--cyan">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10" cy="10" r="8"/>
+              <polyline points="10 5 10 10 14 12"/>
+            </svg>
+          </div>
+          <div class="stat-card__label">Avg Latency</div>
+          <div class="stat-card__value" data-counter="23" data-suffix="ms" data-duration="800" id="statLatency">0ms</div>
+          <div class="stat-card__trend stat-card__trend--up">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 6 9 11 4"/></svg>
+            −5ms from last week
+          </div>
+        </div>
+
+        <!-- Stat 4: Monthly Cost -->
+        <div class="stat-card" id="statCard4">
+          <div class="stat-card__icon stat-card__icon--amber">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="10" y1="2" x2="10" y2="18"/>
+              <path d="M14 6C14 4.3 12.2 3 10 3C7.8 3 6 4.3 6 6C6 9 14 7.5 14 11C14 12.7 12.2 14 10 14C7.8 14 6 12.7 6 11"/>
+            </svg>
+          </div>
+          <div class="stat-card__label">Monthly Cost</div>
+          <div class="stat-card__value" data-counter="1247" data-prefix="$" data-duration="1400" id="statCost">$0</div>
+          <div class="stat-card__trend stat-card__trend--down">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 6 9 11 4"/></svg>
+            +8% from last month
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== Activity Chart ======== -->
+      <div class="card chart-card animate-on-scroll" style="margin-top: var(--space-lg);">
+        <div class="card__header">
+          <div>
+            <div class="card__title">Request Volume</div>
+            <div class="card__subtitle">Requests per hour — last 24 hours</div>
+          </div>
+          <div class="flex gap-sm">
+            <span class="chip chip--active">24h</span>
+            <span class="chip">7d</span>
+            <span class="chip">30d</span>
+          </div>
+        </div>
+        <div class="card__body">
+          <div class="chart-container">
+            <div class="chart-bars" id="chartBars">
+              <!-- Bars rendered by JS -->
+            </div>
+            <div class="chart-labels" id="chartLabels">
+              <span class="chart-labels__label">00</span>
+              <span class="chart-labels__label">01</span>
+              <span class="chart-labels__label">02</span>
+              <span class="chart-labels__label">03</span>
+              <span class="chart-labels__label">04</span>
+              <span class="chart-labels__label">05</span>
+              <span class="chart-labels__label">06</span>
+              <span class="chart-labels__label">07</span>
+              <span class="chart-labels__label">08</span>
+              <span class="chart-labels__label">09</span>
+              <span class="chart-labels__label">10</span>
+              <span class="chart-labels__label">11</span>
+              <span class="chart-labels__label">12</span>
+              <span class="chart-labels__label">13</span>
+              <span class="chart-labels__label">14</span>
+              <span class="chart-labels__label">15</span>
+              <span class="chart-labels__label">16</span>
+              <span class="chart-labels__label">17</span>
+              <span class="chart-labels__label">18</span>
+              <span class="chart-labels__label">19</span>
+              <span class="chart-labels__label">20</span>
+              <span class="chart-labels__label">21</span>
+              <span class="chart-labels__label">22</span>
+              <span class="chart-labels__label">23</span>
+            </div>
+            <div class="chart-summary">
+              <div class="chart-summary__item">
+                <span class="chart-summary__label">Total Requests</span>
+                <span class="chart-summary__value" id="chartTotal">—</span>
+              </div>
+              <div class="chart-summary__item">
+                <span class="chart-summary__label">Peak Hour</span>
+                <span class="chart-summary__value" id="chartPeak">—</span>
+              </div>
+              <div class="chart-summary__item">
+                <span class="chart-summary__label">Avg / Hour</span>
+                <span class="chart-summary__value" id="chartAvg">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== Recent Deployments ======== -->
+      <div class="animate-on-scroll" style="margin-top: var(--space-lg);">
+        <div class="flex flex--between" style="margin-bottom: var(--space-lg);">
+          <h2 class="dash-section-title" style="margin-bottom:0">Recent Deployments</h2>
+          <a href="deploy.html" class="btn btn--ghost btn--sm">View All</a>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" id="deploymentsTable">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Status</th>
+                <th>Endpoint</th>
+                <th style="text-align:right">Requests (24h)</th>
+                <th style="text-align:right">Latency</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Row 1 -->
+              <tr>
+                <td>
+                  <div class="table-model">
+                    <span class="table-model__name">GPT-Neo 2.7B</span>
+                    <span class="table-model__provider">EleutherAI</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--success"><span class="badge__dot"></span>Running</span></td>
+                <td class="mono">api.atlas.ai/v1/gpt-neo</td>
+                <td class="mono" style="text-align:right">234,891</td>
+                <td class="mono" style="text-align:right">18ms</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--ghost" data-action="view">View</button>
+                    <button class="btn btn--ghost" data-action="scale">Scale</button>
+                    <button class="btn btn--ghost" data-action="delete">Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr>
+                <td>
+                  <div class="table-model">
+                    <span class="table-model__name">Stable Diffusion XL</span>
+                    <span class="table-model__provider">Stability AI</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--success"><span class="badge__dot"></span>Running</span></td>
+                <td class="mono">api.atlas.ai/v1/sdxl</td>
+                <td class="mono" style="text-align:right">89,234</td>
+                <td class="mono" style="text-align:right">145ms</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--ghost" data-action="view">View</button>
+                    <button class="btn btn--ghost" data-action="scale">Scale</button>
+                    <button class="btn btn--ghost" data-action="delete">Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 3 -->
+              <tr>
+                <td>
+                  <div class="table-model">
+                    <span class="table-model__name">Whisper Large V3</span>
+                    <span class="table-model__provider">OpenAI</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--warning"><span class="badge__dot"></span>Scaling</span></td>
+                <td class="mono">api.atlas.ai/v1/whisper</td>
+                <td class="mono" style="text-align:right">45,672</td>
+                <td class="mono" style="text-align:right">89ms</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--ghost" data-action="view">View</button>
+                    <button class="btn btn--ghost" data-action="scale">Scale</button>
+                    <button class="btn btn--ghost" data-action="delete">Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 4 -->
+              <tr>
+                <td>
+                  <div class="table-model">
+                    <span class="table-model__name">CodeLlama 34B</span>
+                    <span class="table-model__provider">Meta AI</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--success"><span class="badge__dot"></span>Running</span></td>
+                <td class="mono">api.atlas.ai/v1/codellama</td>
+                <td class="mono" style="text-align:right">123,456</td>
+                <td class="mono" style="text-align:right">34ms</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--ghost" data-action="view">View</button>
+                    <button class="btn btn--ghost" data-action="scale">Scale</button>
+                    <button class="btn btn--ghost" data-action="delete">Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 5 -->
+              <tr>
+                <td>
+                  <div class="table-model">
+                    <span class="table-model__name">BERT Base Uncased</span>
+                    <span class="table-model__provider">Google</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--danger"><span class="badge__dot"></span>Stopped</span></td>
+                <td class="mono">api.atlas.ai/v1/bert</td>
+                <td class="mono" style="text-align:right">0</td>
+                <td class="mono" style="text-align:right">—</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--ghost" data-action="view">View</button>
+                    <button class="btn btn--ghost" data-action="scale">Scale</button>
+                    <button class="btn btn--ghost" data-action="delete">Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 6 -->
+              <tr>
+                <td>
+                  <div class="table-model">
+                    <span class="table-model__name">Mixtral 8x7B</span>
+                    <span class="table-model__provider">Mistral AI</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--success"><span class="badge__dot"></span>Running</span></td>
+                <td class="mono">api.atlas.ai/v1/mixtral</td>
+                <td class="mono" style="text-align:right">198,302</td>
+                <td class="mono" style="text-align:right">42ms</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--ghost" data-action="view">View</button>
+                    <button class="btn btn--ghost" data-action="scale">Scale</button>
+                    <button class="btn btn--ghost" data-action="delete">Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 7 -->
+              <tr>
+                <td>
+                  <div class="table-model">
+                    <span class="table-model__name">Llama 3 70B</span>
+                    <span class="table-model__provider">Meta AI</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--success"><span class="badge__dot"></span>Running</span></td>
+                <td class="mono">api.atlas.ai/v1/llama3-70b</td>
+                <td class="mono" style="text-align:right">312,748</td>
+                <td class="mono" style="text-align:right">28ms</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--ghost" data-action="view">View</button>
+                    <button class="btn btn--ghost" data-action="scale">Scale</button>
+                    <button class="btn btn--ghost" data-action="delete">Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 8 -->
+              <tr>
+                <td>
+                  <div class="table-model">
+                    <span class="table-model__name">Gemma 2 9B</span>
+                    <span class="table-model__provider">Google DeepMind</span>
+                  </div>
+                </td>
+                <td><span class="badge badge--warning"><span class="badge__dot"></span>Provisioning</span></td>
+                <td class="mono">api.atlas.ai/v1/gemma2-9b</td>
+                <td class="mono" style="text-align:right">0</td>
+                <td class="mono" style="text-align:right">—</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn--ghost" data-action="view">View</button>
+                    <button class="btn btn--ghost" data-action="scale">Scale</button>
+                    <button class="btn btn--ghost" data-action="delete">Delete</button>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======== Quick Actions ======== -->
+      <div class="quick-actions animate-on-scroll" style="margin-top: var(--space-xl);">
+        <a href="deploy.html" class="btn btn--primary btn--lg">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="3" x2="8" y2="13"/>
+            <line x1="3" y1="8" x2="13" y2="8"/>
+          </svg>
+          Deploy New Model
+        </a>
+        <a href="marketplace.html" class="btn btn--secondary btn--lg">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="8" cy="8" r="6"/>
+            <path d="M8 5V8L10 10"/>
+          </svg>
+          Browse Marketplace
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Credential {
+  id              String      @id @default(uuid())
+  videoId         String
+  devicePublicKey String
+  deviceType      String
+  startTime       Float
+  endTime         Float
+  frameCount      Int
+  fileHash        String?
+  signature       String
+  deviceChainHash String      @default("")
+  devicePreviousHash String?
+  createdAt         DateTime    @default(now())
+  status            String      @default("VERIFIED")
+
+  // Provenance Lineage (Versioning)
+  parentId          String?     // UUID of the raw v1 video if this is an edited v2
+  editPercentage    Float?      // e.g. 50.0 for 50% deviation
+  editActions       String?     // e.g. "TRIMMED, COMPRESSED"
+
+  frameHashes     FrameHash[]
+}
+
+model ApiKey {
+  id            String   @id @default(uuid())
+  key           String   @unique
+  developerName String
+  createdAt     DateTime @default(now())
+  isActive      Boolean  @default(true)
+}
+
+model HardwareDevice {
+  publicKey   String   @id
+  type        String
+  isRevoked   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model FrameHash {
+  id           String     @id @default(uuid())
+  credentialId String
+  sequence     Int
+  timestamp    Float
+  hash         String
+  credential   Credential @relation(fields: [credentialId], references: [id])
+}

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Marketplace — Atlas AI Cloud</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- ============ TOP NAVIGATION ============ -->
+  <nav class="topnav">
+    <a href="index.html" class="topnav__logo"><span>ATLAS</span></a>
+    <div class="topnav__links">
+      <a href="marketplace.html" class="topnav__link topnav__link--active">Models</a>
+      <a href="dashboard.html" class="topnav__link">Dashboard</a>
+      <a href="monitoring.html" class="topnav__link">Monitoring</a>
+      <a href="#pricing" class="topnav__link">Pricing</a>
+      <a href="https://docs.atlas.ai" class="topnav__link">Docs</a>
+    </div>
+    <div class="topnav__actions">
+      <a href="deploy.html" class="btn btn--primary btn--sm">Deploy Now</a>
+    </div>
+    <button class="topnav__mobile-toggle" onclick="document.querySelector('.topnav__links').classList.toggle('topnav__links--open')">☰</button>
+  </nav>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="main-content main-content--full" style="padding-top: calc(var(--nav-height) + var(--space-xl))">
+    <div class="container container--wide">
+
+      <!-- Page Header -->
+      <div class="page-header animate-on-scroll">
+        <div class="page-header__left">
+          <h2 class="page-header__title">Model Marketplace</h2>
+          <p class="page-header__subtitle">Deploy pre-trained models with one click. Optimized containers, automatic scaling, instant endpoints.</p>
+        </div>
+      </div>
+
+      <!-- ============ SEARCH & FILTER ============ -->
+      <div class="marketplace-header animate-on-scroll">
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <div class="search-bar__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <input type="text" class="search-bar__input" id="marketplace-search" placeholder="Search models by name, publisher, or description…">
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <div class="filter-chips">
+            <button class="chip chip--active filter-chip" data-category="all">All</button>
+            <button class="chip filter-chip" data-category="nlp">NLP</button>
+            <button class="chip filter-chip" data-category="vision">Vision</button>
+            <button class="chip filter-chip" data-category="audio">Audio</button>
+            <button class="chip filter-chip" data-category="multi-modal">Multi-modal</button>
+            <button class="chip filter-chip" data-category="generative">Generative</button>
+          </div>
+          <div class="filter-bar__sort">
+            <span class="filter-bar__sort-label">Sort by</span>
+            <select class="input" id="marketplace-sort">
+              <option value="popular">Popular</option>
+              <option value="recent">Recent</option>
+              <option value="performance">Performance</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Count -->
+      <div class="results-count" id="results-count">
+        Showing <strong id="results-number">12</strong> models
+      </div>
+
+      <!-- ============ MODEL CARDS GRID ============ -->
+      <div class="grid grid--3" id="model-grid">
+
+        <!-- 1. GPT-Neo 2.7B -->
+        <div class="model-card animate-on-scroll" data-name="GPT-Neo 2.7B" data-publisher="EleutherAI" data-desc="Open-source autoregressive language model" data-category="nlp" data-deploys="2.3" data-latency="24" data-recent="6">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">GPT-Neo 2.7B</div>
+              <div class="model-card__publisher">EleutherAI</div>
+            </div>
+            <span class="badge badge--info">NLP</span>
+          </div>
+          <div class="model-card__desc">Open-source autoregressive language model trained on the Pile dataset. Suitable for text generation, completion, and summarization tasks.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">2.3K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">24ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 2. Stable Diffusion XL -->
+        <div class="model-card animate-on-scroll" data-name="Stable Diffusion XL" data-publisher="Stability AI" data-desc="High-quality image generation" data-category="generative" data-deploys="5.1" data-latency="1200" data-recent="9">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">Stable Diffusion XL</div>
+              <div class="model-card__publisher">Stability AI</div>
+            </div>
+            <span class="badge badge--neutral">Generative</span>
+          </div>
+          <div class="model-card__desc">High-quality image generation model with enhanced detail and composition. Supports text-to-image, image-to-image, and inpainting workflows.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">5.1K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">1.2s</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 3. Whisper Large V3 -->
+        <div class="model-card animate-on-scroll" data-name="Whisper Large V3" data-publisher="OpenAI" data-desc="State-of-the-art speech recognition" data-category="audio" data-deploys="3.4" data-latency="89" data-recent="7">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">Whisper Large V3</div>
+              <div class="model-card__publisher">OpenAI</div>
+            </div>
+            <span class="badge badge--warning">Audio</span>
+          </div>
+          <div class="model-card__desc">State-of-the-art speech recognition and transcription model. Supports 100+ languages with automatic language detection and translation.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">3.4K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">89ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 4. LLaMA 3 70B -->
+        <div class="model-card animate-on-scroll" data-name="LLaMA 3 70B" data-publisher="Meta AI" data-desc="Advanced reasoning and generation" data-category="nlp" data-deploys="8.2" data-latency="45" data-recent="12">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">LLaMA 3 70B</div>
+              <div class="model-card__publisher">Meta AI</div>
+            </div>
+            <span class="badge badge--info">NLP</span>
+          </div>
+          <div class="model-card__desc">Advanced reasoning and generation model with state-of-the-art performance on benchmarks. Excels at complex instruction following and multi-turn dialogue.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">8.2K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">45ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 5. CLIP ViT-L/14 -->
+        <div class="model-card animate-on-scroll" data-name="CLIP ViT-L/14" data-publisher="OpenAI" data-desc="Zero-shot image classification" data-category="vision" data-deploys="1.8" data-latency="12" data-recent="3">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">CLIP ViT-L/14</div>
+              <div class="model-card__publisher">OpenAI</div>
+            </div>
+            <span class="badge badge--success">Vision</span>
+          </div>
+          <div class="model-card__desc">Zero-shot image classification and image-text matching. Maps images and text into a shared embedding space for cross-modal retrieval.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">1.8K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">12ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 6. CodeLlama 34B -->
+        <div class="model-card animate-on-scroll" data-name="CodeLlama 34B" data-publisher="Meta AI" data-desc="Code generation and understanding" data-category="nlp" data-deploys="4.6" data-latency="34" data-recent="8">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">CodeLlama 34B</div>
+              <div class="model-card__publisher">Meta AI</div>
+            </div>
+            <span class="badge badge--info">NLP</span>
+          </div>
+          <div class="model-card__desc">Code generation and understanding model specialized for programming tasks. Supports code completion, debugging, and natural language to code translation.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">4.6K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">34ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 7. Segment Anything -->
+        <div class="model-card animate-on-scroll" data-name="Segment Anything" data-publisher="Meta AI" data-desc="Universal image segmentation" data-category="vision" data-deploys="2.7" data-latency="67" data-recent="5">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">Segment Anything</div>
+              <div class="model-card__publisher">Meta AI</div>
+            </div>
+            <span class="badge badge--success">Vision</span>
+          </div>
+          <div class="model-card__desc">Universal image segmentation model that can segment any object in any image. Supports point prompts, box prompts, and automatic mask generation.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">2.7K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">67ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 8. Mistral 7B -->
+        <div class="model-card animate-on-scroll" data-name="Mistral 7B" data-publisher="Mistral AI" data-desc="Efficient language model" data-category="nlp" data-deploys="6.3" data-latency="19" data-recent="10">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">Mistral 7B</div>
+              <div class="model-card__publisher">Mistral AI</div>
+            </div>
+            <span class="badge badge--info">NLP</span>
+          </div>
+          <div class="model-card__desc">Efficient language model with sliding window attention. Outperforms LLaMA 2 13B on all benchmarks while being faster and more memory-efficient.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">6.3K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">19ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 9. Bark -->
+        <div class="model-card animate-on-scroll" data-name="Bark" data-publisher="Suno" data-desc="Text-to-speech and audio generation" data-category="audio" data-deploys="1.5" data-latency="230" data-recent="4">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">Bark</div>
+              <div class="model-card__publisher">Suno</div>
+            </div>
+            <span class="badge badge--warning">Audio</span>
+          </div>
+          <div class="model-card__desc">Text-to-speech and audio generation model. Produces highly realistic multilingual speech, music, sound effects, and nonverbal communication.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">1.5K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">230ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 10. Gemma 2 9B -->
+        <div class="model-card animate-on-scroll" data-name="Gemma 2 9B" data-publisher="Google" data-desc="Lightweight and efficient LLM" data-category="nlp" data-deploys="3.9" data-latency="22" data-recent="11">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">Gemma 2 9B</div>
+              <div class="model-card__publisher">Google</div>
+            </div>
+            <span class="badge badge--info">NLP</span>
+          </div>
+          <div class="model-card__desc">Lightweight and efficient LLM from Google DeepMind. Designed for responsible AI with best-in-class performance at its size for reasoning and coding tasks.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">3.9K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">22ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">JAX</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 11. FLUX.1 -->
+        <div class="model-card animate-on-scroll" data-name="FLUX.1" data-publisher="Black Forest Labs" data-desc="Next-gen image synthesis" data-category="generative" data-deploys="4.1" data-latency="980" data-recent="13">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">FLUX.1</div>
+              <div class="model-card__publisher">Black Forest Labs</div>
+            </div>
+            <span class="badge badge--neutral">Generative</span>
+          </div>
+          <div class="model-card__desc">Next-generation image synthesis model with superior prompt adherence and visual quality. Features rectified flow transformer architecture for faster generation.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">4.1K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">980ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">PyTorch</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- 12. Phi-3 Mini -->
+        <div class="model-card animate-on-scroll" data-name="Phi-3 Mini" data-publisher="Microsoft" data-desc="Small language model for edge" data-category="nlp" data-deploys="2.1" data-latency="8" data-recent="14">
+          <div class="model-card__header">
+            <div>
+              <div class="model-card__name">Phi-3 Mini</div>
+              <div class="model-card__publisher">Microsoft</div>
+            </div>
+            <span class="badge badge--info">NLP</span>
+          </div>
+          <div class="model-card__desc">Small language model optimized for edge deployment. Achieves remarkable performance for its 3.8B parameter size, ideal for on-device and low-latency applications.</div>
+          <div class="model-card__stats">
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="model-card__stat-value">2.1K deploys</span>
+            </div>
+            <div class="model-card__stat">
+              <span class="model-card__stat-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="model-card__stat-value">8ms</span>
+            </div>
+          </div>
+          <div class="model-card__footer">
+            <span class="badge badge--neutral">ONNX</span>
+            <a href="deploy.html" class="btn btn--primary btn--sm">Deploy</a>
+          </div>
+        </div>
+
+        <!-- No Results State -->
+        <div class="no-results" id="no-results">
+          <div class="no-results__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <div class="no-results__title">No models found</div>
+          <div class="no-results__desc">Try adjusting your search terms or clearing the category filter to see more results.</div>
+        </div>
+
+      </div><!-- /grid -->
+
+    </div><!-- /container -->
+  </main>
+
+  <script src="js/marketplace.js"></script>
+</body>
+</html>

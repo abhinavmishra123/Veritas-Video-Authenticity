@@ -1,0 +1,407 @@
+/* ============================================
+   ATLAS AI CLOUD — Monitoring Page
+   Charts, GPU bars, live log, metrics
+   ============================================ */
+
+/* ---- Metric Sub-values ---- */
+.stat-card__sub {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.stat-card__sub span {
+  white-space: nowrap;
+}
+
+/* ---- Sparkline ---- */
+.sparkline {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 28px;
+  margin-top: var(--space-sm);
+}
+
+.sparkline__bar {
+  width: 4px;
+  background: var(--accent-blue);
+  border-radius: 1px 1px 0 0;
+  transition: height var(--transition-base);
+  opacity: 0.6;
+}
+
+.sparkline__bar:last-child {
+  opacity: 1;
+}
+
+/* ---- GPU Utilization Bar ---- */
+.gpu-bar-track {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.gpu-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 0.6s ease, background-color 0.4s ease;
+}
+
+.gpu-bar-fill--blue {
+  background: var(--accent-blue);
+}
+
+.gpu-bar-fill--amber {
+  background: var(--warning);
+}
+
+.gpu-bar-fill--red {
+  background: var(--danger);
+}
+
+.gpu-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.gpu-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.gpu-row:first-child {
+  padding-top: 0;
+}
+
+.gpu-row__label {
+  width: 140px;
+  flex-shrink: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+}
+
+.gpu-row__label span {
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  margin-left: var(--space-xs);
+}
+
+.gpu-row__bar {
+  flex: 1;
+}
+
+.gpu-row__value {
+  width: 48px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+/* ---- Stat Card Horizontal Bar ---- */
+.stat-bar-track {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: var(--space-sm);
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+  background: var(--accent-gradient);
+}
+
+/* ---- Chart Container ---- */
+.chart-container {
+  position: relative;
+  padding-top: var(--space-md);
+}
+
+.chart-container__ylabel {
+  position: absolute;
+  top: var(--space-md);
+  right: 0;
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+/* ---- Bar Chart (Throughput) ---- */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 180px;
+  padding-top: var(--space-lg);
+}
+
+.bar-chart__bar {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  min-height: 4px;
+  transition: height 0.5s ease;
+  cursor: crosshair;
+  position: relative;
+  background: var(--accent-gradient);
+  opacity: 0.7;
+}
+
+.bar-chart__bar:hover {
+  opacity: 1;
+}
+
+.bar-chart__bar::after {
+  content: attr(data-value);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  padding: 3px 6px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all var(--transition-fast);
+}
+
+.bar-chart__bar:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.bar-chart__xaxis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-sm);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+}
+
+/* ---- Latency Distribution (Horizontal Bars) ---- */
+.latency-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding-top: var(--space-sm);
+}
+
+.latency-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.latency-row__label {
+  width: 36px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.latency-row__track {
+  flex: 1;
+  height: 24px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.latency-row__fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 0.8s ease;
+  background: var(--accent-gradient);
+  opacity: 0.8;
+}
+
+.latency-row__value {
+  width: 50px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ---- Live Indicator ---- */
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--success);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+/* ---- Request Log Row Animation ---- */
+@keyframes slideInRow {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.log-row-new td {
+  animation: slideInRow 0.35s ease forwards;
+}
+
+/* ---- Selectors Row ---- */
+.monitoring-selectors {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.monitoring-selectors select.input {
+  width: auto;
+  min-width: 160px;
+}
+
+/* ---- Time Range Chips ---- */
+.time-range {
+  display: inline-flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.time-range__btn {
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  background: transparent;
+  color: var(--text-tertiary);
+  border: none;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.time-range__btn:last-child {
+  border-right: none;
+}
+
+.time-range__btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.time-range__btn--active {
+  color: var(--accent-blue);
+  background: rgba(59, 130, 246, 0.08);
+}
+
+/* ---- Request Log Table Overrides ---- */
+.log-table-wrap {
+  max-height: 520px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.log-table-wrap .table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* ---- Status value coloring in stat card ---- */
+.stat-card__value--success {
+  color: var(--success);
+}
+
+.stat-card__value--warning {
+  color: var(--warning);
+}
+
+.stat-card__value--danger {
+  color: var(--danger);
+}
+
+/* ---- Responsive Adjustments ---- */
+@media (max-width: 1024px) {
+  .bar-chart {
+    height: 140px;
+  }
+
+  .gpu-row__label {
+    width: 110px;
+  }
+}
+
+@media (max-width: 768px) {
+  .monitoring-selectors {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .monitoring-selectors select.input {
+    width: 100%;
+  }
+
+  .bar-chart {
+    height: 120px;
+    gap: 2px;
+  }
+
+  .gpu-row {
+    flex-wrap: wrap;
+  }
+
+  .gpu-row__label {
+    width: 100%;
+  }
+
+  .latency-row__label {
+    width: 30px;
+  }
+
+  .latency-row__value {
+    width: 42px;
+    font-size: var(--text-xs);
+  }
+}

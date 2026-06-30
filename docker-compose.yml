@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  veritas-api:
+    build:
+      context: ./veritas-api
+    container_name: veritas_backend
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount the prisma directory to persist the dev.db SQLite database
+      - veritas_db_data:/app/prisma
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+  veritas-capture:
+    build:
+      context: ./veritas-capture
+    container_name: veritas_frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - veritas-api
+    restart: unless-stopped
+
+volumes:
+  veritas_db_data:
